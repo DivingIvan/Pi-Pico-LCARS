@@ -18,5 +18,5 @@ The basic components required to implement this project are:-
 
 •	RV3028 RTC - https://shop.pimoroni.com/products/rv3028-real-time-clock-rtc-breakout
 
-•	A momentary SPST push switch. The software has support for an illuminated one, but this is optional. If using an illuminated push switch, you will also require a resistor to limit the LED current.
+•	A momentary SPST push switch. The software has support for an illuminated one, but this is optional. If using an illuminated push switch, you will also require an appropriate resistor to limit the LED current.
 
