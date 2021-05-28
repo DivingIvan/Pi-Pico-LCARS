@@ -18,6 +18,8 @@ The basic components required to implement this project are:-
 
 •	RV3028 RTC - https://shop.pimoroni.com/products/rv3028-real-time-clock-rtc-breakout
 
+•	Various jumper wires/signal wire/breadboard/prototyping board/PCB pins and sockets/solder, etc.
+
 # Optional
 
 I have also experimented with a different RTC, the PCF8523 - https://thepihut.com/products/adafruit-pcf8523-real-time-clock-assembled-breakout-board
@@ -25,6 +27,8 @@ I have also experimented with a different RTC, the PCF8523 - https://thepihut.co
 •	Pico LiPo Shim - https://shop.pimoroni.com/products/pico-lipo-shim (to allow the project to run off a battery).
 
 •	Rechargeable battery. I used a Lithium Ion one - https://shop.pimoroni.com/products/lithium-ion-battery-pack?variant=23417820487
+
+•	Panel mount micro USB extension lead, to allow external connection if the project is going inside an enclosure - https://shop.pimoroni.com/products/right-angle-panel-mount-extension-cables-25cm?variant=32013609631827
 
 •	One or more momentary SPST push switches, depending on which optional functionality you wish to include. The software has support for illuminated ones, but this is optional. If using illuminated push switches, you will also require appropriate resistors to limit the LED current. I have incorporated 2 illuminated push switches into my implementation; one connected to the Pico reset pin (to allow for soft reset) and one to allow the TFT display backlight to be switched on or off.
 
