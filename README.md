@@ -6,6 +6,8 @@ This project is a Raspberry Pi Pico RP2040 based temperature/humidity/atmospheri
 
 The original inspiration for this project comes from [@Recantha](https://twitter.com/recantha)'s [PicoPiCorder project](https://github.com/recantha/picopicorder); but with an updated user interface.
 
+Note: In the early stages of this project I also tried running on a Pimoroni Tiny 2040 (https://shop.pimoroni.com/products/tiny-2040), and some of the code from this is still present. However, as I added more features I eventually ran out of usable GPIO pins.
+
 The basic components required to implement this project are:-
 
 •	Raspberry Pi Pico RP2040 - https://cpc.farnell.com/raspberry-pi/raspberry-pi-pico/raspberry-pi-pico-rp2040-mcu-board/dp/SC17106
