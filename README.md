@@ -34,6 +34,6 @@ I have also experimented with a different RTC, the PCF8523 - https://thepihut.co
 
 •	An optional SPST toggle switch, depending again on which optional functionality you wish to include. I used one in this project, basically to enable/disable the reset push switch. The LED in the reset illuminated push switch indicates when the 'reset' is active.
 
-•	One or more optional LEDs, yet again depending on which optional functionality you might wish to include. You'll also required appropriate resistors to go with them. I used just the one LED for this project (in addition to the illuminated push switches), to indicate when external power is connected.
+•	One or more optional LEDs, yet again depending on which optional functionality you might wish to include. You'll also require appropriate resistors to go with them. I used just the one LED for this project (in addition to the illuminated push switches), to indicate when external power is connected.
 
 •	Some sort of enclosure to put everything in.
