@@ -54,3 +54,13 @@ I have also experimented with 2 other Real Time Clocks, and the code includes th
 •	One or more optional LEDs, yet again depending on which optional functionality you might wish to include. You'll also require appropriate resistors to go with them. I used just the one LED for this project (in addition to the illuminated push switches), to indicate when external power is connected.
 
 •	Some sort of enclosure to put everything in.
+
+# Installation
+
+To deploy this code on a Raspberry Pi Pico RP2040, first install CircuitPython:-
+
+https://circuitpython.org/board/raspberry_pi_pico/
+
+Having installed CircuitPython, copy all the project files and folders (excluding the documents folder and the ReadMe file) to the CIRCUITPY drive.
+
+**NOTE - If you wish to leave your CIRCUITPY drive as a writable USB drive, do not copy the boot.py file at this stage (see IMPORTANT NOTE at the top of this page).**
