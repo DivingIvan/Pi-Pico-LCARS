@@ -63,4 +63,4 @@ https://circuitpython.org/board/raspberry_pi_pico/
 
 Having installed CircuitPython, copy all the project files and folders (excluding the documents folder and the ReadMe file) to the CIRCUITPY drive.
 
-**NOTE - If you wish to leave your CIRCUITPY drive as a writable USB drive, do not copy the boot.py file at this stage (see IMPORTANT NOTE at the top of this page).**
+**NOTE - If you wish to leave your CIRCUITPY drive as a writable USB drive, do not copy the boot.py file at this stage (see [IMPORTANT NOTE](https://github.com/DivingIvan/Pi-Pico-LCARS#important-note) at the top of this page).**
