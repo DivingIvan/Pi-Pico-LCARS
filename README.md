@@ -29,11 +29,15 @@ The basic components required to implement this project are:-
 
 •	RV3028 RTC - https://shop.pimoroni.com/products/rv3028-real-time-clock-rtc-breakout
 
+I have also experimented with 2 other Real Time Clocks, and the code includes the necessary libraries.
+
+•	PCF8523 - https://thepihut.com/products/adafruit-pcf8523-real-time-clock-assembled-breakout-board
+
+•	DS3231 - https://thepihut.com/products/adafruit-ds3231-precision-rtc-breakout
+
 •	Various jumper wires/signal wire/breadboard/prototyping board/PCB pins and sockets/solder, etc.
 
 # Optional
-
-I have also experimented with a different RTC, the PCF8523 - https://thepihut.com/products/adafruit-pcf8523-real-time-clock-assembled-breakout-board
 
 •	Pico LiPo Shim - https://shop.pimoroni.com/products/pico-lipo-shim (to allow the project to run off a battery).
 
