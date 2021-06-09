@@ -1,7 +1,7 @@
 from micropython import const
 from adafruit_display_text import label
 from adafruit_bitmap_font import bitmap_font
-from time import sleep
+from time import sleep, struct_time
 import gc
 import board
 import analogio
@@ -17,6 +17,7 @@ from adafruit_display_shapes.rect import Rect
 from Graph import graph
 import AirQuality
 import RTC
+import json
 
 _PICO = const(0)
 _TINY2040 = const(1)
@@ -64,7 +65,7 @@ if _BOARDTYPE == _PICO:
     spi_reset = board.GP20
     tft_cs = board.GP17
     tft_dc = board.GP21
-    chargingPin = board.GP26
+    chargingPin = board.VBUS_SENSE
     tft_backlight = board.GP27
     backlightButtonPin = board.GP28
     backlightLEDPin = board.GP15
@@ -121,7 +122,8 @@ display = adafruit_ili9341.ILI9341(display_bus, width=_DISPLAY_WIDTH, height=_DI
 i2c = busio.I2C(scl=i2c_scl, sda=i2c_sda)
 veml = adafruit_veml6075.VEML6075(i2c, integration_time=100)
 #rtc = RTC.RV3028_I2C(i2c, address=0x52)
-rtc = RTC.PCF8523_I2C(i2c)
+#rtc = RTC.PCF8523_I2C(i2c)
+rtc = RTC.DS3231_I2C(i2c)
 bme680 = adafruit_bme680.Adafruit_BME680_I2C(i2c, address=0x76)
 bme680.seaLevelhPa = _SEA_LEVEL_NORMAL
 
@@ -129,7 +131,7 @@ bme680.seaLevelhPa = _SEA_LEVEL_NORMAL
 lcars = displayio.Group()
 
 # Code to set RTC if needed. Code 'save' should be done around 8-10 seconds in advance.
-#rtc.datetime = struct_time(2021, 5, 27, 8, 35, 0, 4, -1, -1)
+#rtc.datetime = struct_time(2021, 6, 4, 8, 38, 30, 5, -1, -1)
 
 def toggleBacklight():
     # Function to toggle TFT backlight and return whether backlight is on/off.
@@ -221,10 +223,25 @@ graphScaleText = label.Label(font=font_s, text="{:.2f}".format(0), anchor_point=
 lcars.append(graphScaleText)
 
 # Add pressure graph to display
-pressure = bme680.pressure
-pressureGraph = graph(lcars, scalePosition(50, 55), (xScaleFactor, yScaleFactor), _PRESSURE_GRAPH_RANGE, [pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
-diffPressure = pressureGraph.updateGraph([pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
-pressureValues = None
+try:
+    # Attempt to read press values list from saved file
+    with open("/pressures.txt", "r") as fp:
+        pressureValues = json.load(fp)
+    if len(pressureValues) == (_PRESSURE_PLOT_COUNT + 1):
+        pressureGraph = graph(lcars, scalePosition(50, 55), (xScaleFactor, yScaleFactor), _PRESSURE_GRAPH_RANGE, pressureValues)
+        diffPressure = pressureGraph.updateGraph(pressureValues)
+    else:
+        # Pressure list is incorrect length, so use a list of default values
+        pressure = bme680.pressure
+        pressureGraph = graph(lcars, scalePosition(50, 55), (xScaleFactor, yScaleFactor), _PRESSURE_GRAPH_RANGE, [pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
+        diffPressure = pressureGraph.updateGraph([pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
+        pressureValues = None
+except OSError as e:
+    # Assume file has not been created yet, so use a list of default values
+    pressure = bme680.pressure
+    pressureGraph = graph(lcars, scalePosition(50, 55), (xScaleFactor, yScaleFactor), _PRESSURE_GRAPH_RANGE, [pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
+    diffPressure = pressureGraph.updateGraph([pressure for x in range(_PRESSURE_PLOT_COUNT + 1)])
+    pressureValues = None
 
 # Refresh display
 display.show(lcars)
@@ -275,6 +292,13 @@ while True:
 
             graphScaleText.text = "{:.2f}".format(pressureGraph.updateGraph(pressureValues))
 
+            # Save pressure data to text file
+            try:
+                with open("/pressures.txt", "w") as fp:
+                    json.dump(pressureValues, fp)
+            except OSError as e:
+                print("Could not save pressure values to text file")
+
     uvIndicator.update(veml.uv_index)
     uvaIndicator.update(veml.uva)
     uvbIndicator.update(veml.uvb)
@@ -288,10 +312,10 @@ while True:
     pressureText.text = "{:.1f} hPa  {:.1f}%".format(bme680.pressure, bme680.humidity)
     memoryText.text = "{:d}".format(gc.mem_free())
 
+    # Power LED indicates whether external power is connected
+    powerLED.value = not charging.value
     # Pulse backlight indicator LED if TFT backlight is off (negative on LED pin will illuminate LED)
     backlightLED.value = backlightOn
-    powerLED.value = False
     sleep(0.05)
     backlightLED.value = True
-    powerLED.value = True
     sleep(0.45)
