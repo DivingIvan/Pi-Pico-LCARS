@@ -2,6 +2,8 @@
 
 This project is a Raspberry Pi Pico RP2040 based temperature/humidity/atmospheric pressure/air quality/UV monitor with an LCARS style user interface.
 
+This code requires CircuitPython 6.3.0 or later.
+
 # IMPORTANT NOTE
 
 **The boot.py script file is an optional file. This Python script will run on every boot. When executed, the root filesystem will be mounted so that CircuitPython can write to it. This script file allows files to be saved to the flash drive through CircuitPython code. The Pi Pico LCARS code will save a list of historic atmospheric pressure readings in order to allow the pressure trend graph to be drawn. This can only be done if the filesystem is writable. If you do not wish to save these readings, this boot.py script file is not required.**
