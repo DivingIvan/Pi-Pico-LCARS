@@ -2,7 +2,7 @@
 
 This project is a Raspberry Pi Pico RP2040 based temperature/humidity/atmospheric pressure/air quality/UV monitor with an LCARS style user interface.
 
-This code requires CircuitPython 6.3.0 or later.
+**This code requires CircuitPython 6.3.0 or later.**
 
 # IMPORTANT NOTE
 
