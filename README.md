@@ -2,7 +2,8 @@
 
 This project is a Raspberry Pi Pico RP2040 based temperature/humidity/atmospheric pressure/air quality/UV monitor with an LCARS style user interface.
 
-![LCARS Display](https://github.com/DivingIvan/Pi-Pico-LCARS/blob/main/PXL_20210515_102200687.jpg "LCARS Display")
+![LCARS](https://github.com/DivingIvan/Pi-Pico-LCARS/blob/main/PXL_20210609_073804950.jpg "LCARS")
+![LCARS Display](https://github.com/DivingIvan/Pi-Pico-LCARS/blob/main/PXL_20210609_073912946.jpg "LCARS Display")
 
 The original inspiration for this project comes from [@Recantha](https://twitter.com/recantha)'s [PicoPiCorder project](https://github.com/recantha/picopicorder); but with an updated user interface.
 
