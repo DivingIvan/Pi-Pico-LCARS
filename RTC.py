@@ -196,7 +196,7 @@ class PCF8523_I2C(adafruit_pcf8523.PCF8523):
     @property
     def datetimeString(self):
         dt = self.datetime
-        return "{:02d}/{:02d}/{:04d} {:02d}:{:02d}".format(dt.tm_mday, dt.tm_mon, dt.tm_year, dt.tm_hour, dt.tm_min)# Create a subclass for the PCF8523 RTC
+        return "{:02d}/{:02d}/{:04d} {:02d}:{:02d}".format(dt.tm_mday, dt.tm_mon, dt.tm_year, dt.tm_hour, dt.tm_min)
 
 # Create a subclass for the DS3231 RTC
 class DS3231_I2C(adafruit_ds3231.DS3231):
